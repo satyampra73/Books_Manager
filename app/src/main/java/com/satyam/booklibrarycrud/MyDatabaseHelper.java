@@ -19,7 +19,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Column_pages = "book_pages";
 
 
-    public MyDatabaseHelper(Context context) {
+    MyDatabaseHelper(Context context) {
         super(context, DatabaseName, null, DatabaseVersion);
         this.context = context;
     }
@@ -53,13 +53,29 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
-    Cursor readAllData(){
-        String query="SELECT * FROM "+Table_name;
-        SQLiteDatabase db= this.getReadableDatabase();
-        Cursor cursor=null;
-        if(db!=null){
-           cursor=db.rawQuery(query,null);
+
+    Cursor readAllData() {
+        String query = "SELECT * FROM " + Table_name;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
         }
         return cursor;
+    }
+
+    void updateData(String rawId, String title, String author, String pages) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(Column_Title, title);
+        cv.put(Column_author, author);
+        cv.put(Column_pages, pages);
+        long result = db.update(Table_name, cv, "_id=?", new String[]{rawId});
+        if (result == -1) {
+            Toast.makeText(context, "failed to Update", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Successfully updated", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

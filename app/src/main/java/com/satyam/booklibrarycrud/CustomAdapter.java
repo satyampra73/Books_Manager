@@ -26,6 +26,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         this.book_pages = book_pages;
     }
 
+    public CustomAdapter() {
+    }
+
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -39,18 +42,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.txt_title.setText(String.valueOf(book_title.get(position)));
         holder.txt_Author.setText(String.valueOf(book_author.get(position)));
         holder.txt_pages.setText(String.valueOf(book_pages.get(position)));
-//
-//        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
-//    @Override
-//    public void onClick(View view) {
-//       Intent intent=new Intent(context,UpdateActivity.class);
-//        intent.putExtra("id",String.valueOf(book_id.get(position)));
-//        intent.putExtra("title",String.valueOf(book_title.get(position)));
-//        intent.putExtra("author",String.valueOf(book_author.get(position)));
-//        intent.putExtra("pages",String.valueOf(book_pages.get(position)));
-//        context.startActivity(intent);
-//    }
-//        });
     }
 
     @Override
@@ -58,9 +49,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         return book_id.size();
     }
 
-    class CustomViewHolder extends RecyclerView.ViewHolder {
+     class CustomViewHolder extends RecyclerView.ViewHolder {
         TextView txt_bookId, txt_Author, txt_title, txt_pages;
-//        LinearLayout mainLayout;
 
         public CustomViewHolder(View itemView) {
             super(itemView);

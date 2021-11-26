@@ -76,6 +76,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(this, book_id.get(position)+" ->"+book_title.get(position), Toast.LENGTH_SHORT).show();
+      Intent intent=new Intent(this,UpdateActivity.class);
+        intent.putExtra("id",String.valueOf(book_id.get(position)));
+        intent.putExtra("title",String.valueOf(book_title.get(position)));
+        intent.putExtra("author",String.valueOf(book_author.get(position)));
+        intent.putExtra("pages",String.valueOf(book_pages.get(position)));
+      startActivity(intent);
     }
 }
