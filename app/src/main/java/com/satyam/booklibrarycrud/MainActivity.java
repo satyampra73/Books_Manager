@@ -10,11 +10,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     MyDatabaseHelper databaseHelper;
     CustomAdapter customAdapter;
     SwipeRefreshLayout swipeRefresh;
+    ImageView empty_image;
     RecyclerView recyclerView;
     ArrayList<String> book_id, book_title, book_author, book_pages;
     private FloatingActionButton add_button;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
         add_button = findViewById(R.id.add_button);
+        empty_image=findViewById(R.id.empty_image);
         swipeRefresh = findViewById(R.id.swipeRefresh);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         add_button.setOnClickListener(new View.OnClickListener() {
@@ -58,13 +62,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     void storeDataInArrays() {
         Cursor cursor = databaseHelper.readAllData();
         if (cursor.getCount() == 0) {
-            Toast.makeText(MainActivity.this, "No Data", Toast.LENGTH_SHORT).show();
+            empty_image.setVisibility(View.VISIBLE);
+            Toast.makeText(this, " No Data ", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
                 book_id.add(cursor.getString(0));
                 book_title.add(cursor.getString(1));
                 book_author.add(cursor.getString(2));
                 book_pages.add(cursor.getString(3));
+                empty_image.setVisibility(View.INVISIBLE);
             }
         }
     }
@@ -113,7 +119,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
             public void onClick(DialogInterface dialogInterface, int i) {
                 databaseHelper = new MyDatabaseHelper(MainActivity.this);
                 databaseHelper.deleteAll();
-                recreate();
+                Intent intent=new Intent(MainActivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
                 Toast.makeText(MainActivity.this, "All Deleted", Toast.LENGTH_SHORT).show();
             }
         });

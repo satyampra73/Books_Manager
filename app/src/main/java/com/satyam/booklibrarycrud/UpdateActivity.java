@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +45,8 @@ public class UpdateActivity extends AppCompatActivity {
                 author = authorInput.getText().toString().trim();
                 pages = pagesInput.getText().toString().trim();
                 myDatabaseHelper.updateData(id, title, author, pages);
+                Intent intent=new Intent(UpdateActivity.this,MainActivity.class);
+                startActivity(intent);
 
             }
         });
