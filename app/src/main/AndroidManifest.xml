@@ -11,7 +11,7 @@
         android:theme="@style/Theme.BookLibraryCRUD">
         <activity
             android:name=".UpdateActivity"
-            android:label="Update Data"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".AddActivity"
