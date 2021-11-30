@@ -38,7 +38,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        holder.txt_bookId.setText(String.valueOf(book_id.get(position)));
         holder.txt_title.setText(String.valueOf(book_title.get(position)));
         holder.txt_Author.setText(String.valueOf(book_author.get(position)));
         holder.txt_pages.setText(String.valueOf(book_pages.get(position)));
@@ -50,11 +49,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     }
 
      class CustomViewHolder extends RecyclerView.ViewHolder {
-        TextView txt_bookId, txt_Author, txt_title, txt_pages;
+        TextView  txt_Author, txt_title, txt_pages;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
-            txt_bookId = itemView.findViewById(R.id.txt_bookId);
+
             txt_Author = itemView.findViewById(R.id.txt_bookAuthor);
             txt_title = itemView.findViewById(R.id.txt_book_title);
             txt_pages = itemView.findViewById(R.id.pages);
