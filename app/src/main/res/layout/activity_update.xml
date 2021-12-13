@@ -82,7 +82,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="35dp"
                 android:backgroundTint="#FF9C770A"
-                android:text="Add"
+                android:text="Update"
                 android:textSize="15dp"
                 android:textAllCaps="false" />
 
